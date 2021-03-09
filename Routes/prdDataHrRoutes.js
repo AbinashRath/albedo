@@ -6,5 +6,5 @@ var {prdDataHr} = require("../controllers/prdDataHr/prdDataHr");
 
 router.post("/deleteProduction", deleteProduction);
 router.get("/fetchProduction", fetchProduction);
-router.delete("/prdDataHr", prdDataHr);
+router.post("/prdDataHr", prdDataHr);
 module.exports = router;

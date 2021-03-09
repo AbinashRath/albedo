@@ -5,7 +5,7 @@ var { deleteWorkstation } = require("../controllers/Workstation/deleteWorkstatio
 var { fetchWorkstation } = require("../controllers/Workstation/fetchWorkstation");
 
 router.post("/addWorkstation", addWorkstation);
-router.delete("/deleteWorkstation", deleteWorkstation);
+router.post("/deleteWorkstation", deleteWorkstation);
 router.get("/fetchWorkstation", fetchWorkstation);
 
 module.exports = router;

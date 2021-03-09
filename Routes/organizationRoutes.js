@@ -6,6 +6,6 @@ var {fetchOrganization} = require("../controllers/Organization/fetchOrganization
 
 router.post("/addOrganization", addOrganization);
 router.get("/fetchOrganization", fetchOrganization);
-router.delete("/deleteOrganization", deleteOrganization);
+router.post("/deleteOrganization", deleteOrganization);
 
 module.exports = router;

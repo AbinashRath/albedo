@@ -19,7 +19,7 @@ var fetchRoles = require("./Routes/roleRoutes");
 
 var addReason = require("./Routes/reasonRoutes");
 var deleteReason = require("./Routes/reasonRoutes");
-var fetchreason = require("./Routes/reasonRoutes");
+var fetchReason = require("./Routes/reasonRoutes");
 
 var prdDataHr = require("./Routes/prdDataHrRoutes");  
 var deleteProduction = require("./Routes/prdDataHrRoutes");
@@ -73,7 +73,7 @@ router.use("/api", fetchRoles);
 //reason Routes
 router.use("/api", addReason);
 router.use("/api", deleteReason);
-router.use("/api", fetchreason);
+router.use("/api", fetchReason);
 
 //production routes
 router.use("/api", prdDataHr);

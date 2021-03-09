@@ -2,7 +2,7 @@
   "name": "albedo",
   "version": "0.0.0",
   "private": true,
-  "description": "this is the modified code of albedo systems",
+  "description": "albedo systems",
   "scripts": {
     "start": "nodemon ./bin/www -e js,hbs"
   },

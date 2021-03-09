@@ -6,6 +6,6 @@ var {fetchItemMaster} = require("../controllers/ItemMaster/fetchItemMaster");
 
 router.post("/addItemMaster", addItemMaster);
 router.get("/fetchItemMaster", fetchItemMaster);
-router.delete("/deleteItem", deleteItem);
+router.post("/deleteItem", deleteItem);
 
 module.exports = router;

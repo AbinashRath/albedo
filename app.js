@@ -4,7 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
-var bodyParser = require("body-parser");
+// var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var router = express.Router();
 var color =  require('color');
@@ -32,9 +32,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // for parsing application/json
-app.use(bodyParser.json());
+app.use(express.json());
 // for parsing application/xwww-
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 //mount routes
 app.use("/", indexRouter);
@@ -57,7 +57,7 @@ app.use(function (err, req, res, next) {
   res.locals.error = req.app.get("env") === "development" ? err : {};
   // render the error page
   res.status(err.status || 500);
-  res.send("error"); //this or res.status(err.status || 500).send('error')
+  res.render('error')
 });
 
 module.exports = app;

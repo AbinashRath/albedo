@@ -5,7 +5,7 @@ var { deleteRoles } = require("../controllers/Roles/deleteRoles");
 var { addRoles } = require("../controllers/Roles/addRoles");
 
 router.post("/addRoles", addRoles);
-router.delete("/deleteRoles", deleteRoles);
+router.post("/deleteRoles", deleteRoles);
 router.get("/fetchRoles", fetchRoles);
 
 module.exports = router;

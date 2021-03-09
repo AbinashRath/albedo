@@ -5,6 +5,6 @@ var {deleteJobScheduler} = require("../controllers/JobScheduler/deleteJobSchedul
 var {fetchJobScheduler} = require("../controllers/JobScheduler/fetchJobScheduler");
 router.post("/addJobScheduler", addJobScheduler);
 router.get("/fetchJobScheduler", fetchJobScheduler);
-router.delete("/deleteJobScheduler", deleteJobScheduler);
+router.post("/deleteJobScheduler", deleteJobScheduler);
 
 module.exports = router;

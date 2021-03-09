@@ -6,6 +6,6 @@ var {fetchInventory} = require("../controllers/Inventory/fetchInventory");
 
 router.get("/fetchInventory", fetchInventory);
 router.post("/addInventory", addInventory);
-router.delete("/deleteInventory", deleteInventory);
+router.post("/deleteInventory", deleteInventory);
 
 module.exports = router;

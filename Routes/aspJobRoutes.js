@@ -6,7 +6,7 @@ var {deleteaspJob} = require("../controllers/aspJob/deleteaspJob");
 var {fetchJob} = require("../controllers/aspJob/fetchJob");
 
 router.post("/aspJob", aspJob);
-router.delete("/deleteaspJob", deleteaspJob);
+router.post("/deleteaspJob", deleteaspJob);
 router.get("/fetchJob", fetchJob);
 
 module.exports = router;

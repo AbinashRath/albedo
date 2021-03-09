@@ -1,6 +1,11 @@
+var express = require ('express');
+var mongoose = require('mongoose');
 var User = require("../../models/userSchema");
 var Roles = require("../../models/roleSchema");
 var ObjectID = require('mongodb').ObjectID;
+var bcrypt = require('bcrypt');
+var nodemailer = require('nodemailer')
+
 
 exports.addUser = (req, res, next) => {
   console.log("Data; " + req.body.pwd);
