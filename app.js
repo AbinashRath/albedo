@@ -16,7 +16,7 @@ var usersRouter = require("./users");
 // var app = express();
 
 //connect to database
-mongoose.connect("mongodb://localhost:27017/albedo", {
+mongoose.connect('mongodb+srv://anshal123:atgenx123@albedo.fsemv.mongodb.net/Albedo?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
