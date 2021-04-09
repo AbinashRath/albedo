@@ -1,13 +1,15 @@
 var express = require("express");
 var router = express.Router();
+router.use(express.json());
 
+var {login} = require("./controllers/User/loginAuth");
 
 // Import Routes
 var addUser = require("./Routes/userRoutes");
 var deleteUser = require("./Routes/userRoutes");
 var fetchUsers = require("./Routes/userRoutes");
 var reset = require("./Routes/userRoutes");
-var login = require("./Routes/userRoutes");
+// var login = require("./Routes/userRoutes");
 
 var addWorkstation = require("./Routes/workStationRoutes");
 var deleteWorkstation = require("./Routes/workStationRoutes")
@@ -25,8 +27,8 @@ var prdDataHr = require("./Routes/prdDataHrRoutes");
 var deleteProduction = require("./Routes/prdDataHrRoutes");
 var fetchProduction = require("./Routes/prdDataHrRoutes");
 
-var addOrganization=require("./Routes/organizationRoutes");
-var fetchOrganization=require("./Routes/organizationRoutes");
+var addOrganization = require("./Routes/organizationRoutes");
+var fetchOrganization = require("./Routes/organizationRoutes");
 var deleteOrganization = require("./Routes/organizationRoutes");
 
 var addJobScheduler= require("./Routes/jobSchedulerRoutes");
@@ -58,7 +60,7 @@ router.use("/api", addUser);
 router.use("/api", deleteUser);
 router.use("/api", fetchUsers);
 router.use("/api", reset);
-router.use("/api", login);
+router.use("/api/login", login);
 
 //Workstaion routes
 router.use("/api", addWorkstation);

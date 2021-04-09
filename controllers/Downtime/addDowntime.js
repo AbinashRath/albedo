@@ -1,4 +1,5 @@
 var Downtime = require('../../models/downtimeSchema');
+var mongoose = require('mongoose');
 var ObjectID = require('mongodb').ObjectID;
 exports.addDowntime = (req, res, next) => {
 

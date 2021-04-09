@@ -3,19 +3,21 @@ var mongoose = require('mongoose');
 var User = require("../../models/userSchema");
 var Roles = require("../../models/roleSchema");
 var ObjectID = require('mongodb').ObjectID;
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var nodemailer = require('nodemailer')
+const moment= require('moment');
 
 
 exports.addUser = (req, res, next) => {
-  console.log("Data; " + req.body.pwd);
+  
   // if(userSchema.plugin(uniqueValidator)){
   // 	res.json({message: 'User Name or Email Id already exists' , status: 1});
   // }
   var userInfo = req.body;
-  var startDate = moment(userInfo.startdate).format("YYYY-MM-DD HH:mm:ss");
-  var endDate = moment(userInfo.enddate).format("YYYY-MM-DD HH:mm:ss");
-  var currentDate = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+  console.log("Data:" + req.body.pwd);
+  var startDate = moment(userInfo.startdate).format('MMMM Do YYYY, h:mm:ss a');
+  var endDate = moment(userInfo.enddate).format('MMMM Do YYYY, h:mm:ss a');
+  var currentDate = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a');
   var userId = userInfo.UserId;
 
   if (userId == "1234") {
@@ -30,7 +32,7 @@ exports.addUser = (req, res, next) => {
       res.json({ message: "RoleName error", status: 1 });
     } else {
       console.log("Response: " + response);
-      roleName = response.Role_Name;
+      // roleName = response.Role_Name;
 
       bcrypt.genSalt(saltRounds, function (err, salt) {
         if (err) {
@@ -61,7 +63,7 @@ exports.addUser = (req, res, next) => {
                 First_Login: 1,
                 status: 1,
               });
-              newUser.save(function (err, User) {
+              newUser.save(function (err) {
                 if (err) {
                   if (
                     err.errors.User_name != undefined &&
@@ -80,16 +82,16 @@ exports.addUser = (req, res, next) => {
                     res.json({ message: "Save Error", status: 1 });
                   }
                 } else {
-                  var transporter = nodemailer.createTransport({
-                    host: "smtp.yandex.com",
-                    port: 465,
+                  var transporter = nodemailer.createTransport(smtpTrasport({
+                    service:'gmail',
+                    host: "smtp.gmail.com",
                     auth: {
                       //user: 'foodonlineimca@gmail.com',
-                      user: "support@atgenx.com",
+                      user: "atgenx@gmail.com",
                       //pass: 'imca@123'
                       pass: "@genX2021",
                     },
-                  });
+                  }));
 
                   var mailOptions = {
                     from: "support@atgenx.com",

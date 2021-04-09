@@ -7,10 +7,13 @@ var cors = require("cors");
 // var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var router = express.Router();
-var color =  require('color');
-//import Routes
+// var color =  require('color');
 var indexRouter = require("./indexRoutes");
 var usersRouter = require("./users");
+
+
+//initialize the app
+// var app = express();
 
 //connect to database
 mongoose.connect("mongodb://localhost:27017/albedo", {
@@ -19,7 +22,24 @@ mongoose.connect("mongodb://localhost:27017/albedo", {
   useCreateIndex: true,
 }).then((console.log(`DATABASE CONNECTED`)));
 
+//initialize the app
 var app = express();
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
+
+//import Routes
+var indexRouter = require("./indexRoutes");
+var usersRouter = require("./users");
+
+// //connect to database
+// mongoose.connect("mongodb://localhost:27017/albedo", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useCreateIndex: true,
+// }).then((console.log(`DATABASE CONNECTED`)));
+
+
 app.use(cors());
 
 // view engine setup
@@ -32,7 +52,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // for parsing application/json
-app.use(express.json());
+// app.use(express.json());
 // for parsing application/xwww-
 // app.use(bodyParser.urlencoded({ extended: true }));
 

@@ -1,4 +1,5 @@
 var Reason = require("../../models/reasonSchema");
+var mongoose = require('mongoose');
 var ObjectID = require('mongodb').ObjectID;
 
 exports.addReason = (req, res, next) => {

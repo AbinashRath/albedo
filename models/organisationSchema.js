@@ -15,7 +15,7 @@ var organisationSchema = new mongoose.Schema({
 });
 organisationSchema.pre("save", function (next) {
   this.Organization_id = this._id;
-  //this.Workstation = randomString();
+  // this.Workstation = randomString();
   next();
 });
 module.exports = mongoose.model(

@@ -1,16 +1,20 @@
 var Organization = require("../../models/organisationSchema");
+var mongoose = require('mongoose');
 var ObjectID = require('mongodb').ObjectID;
+// var randomString = require('../../utils/randomString');
 // var Roles = require('../models/roleSchema');
 
 exports.addOrganization = (req, res, next) => {
-  let organizationInfo = req.body;
-  let organizationCode = organizationInfo.Organization_Code;
-  let client = organizationInfo.Client;
-  let location = organizationInfo.Location;
-  let costCenter = organizationInfo.costCenter;
-  let plant = organizationInfo.Plant;
-  let shopFloor = organizationInfo.Shopfloor;
-  let businessUnit = organizationInfo.businessUnit;
+  console.log("check");
+  console.log(req.body);
+ var organizationInfo = req.body;
+ var organizationCode = organizationInfo.Organization_Code;
+ var client = organizationInfo.Client;
+ var location = organizationInfo.Location;
+ var costCenter = organizationInfo.costCenter;
+ var plant = organizationInfo.Plant;
+ var shopFloor = organizationInfo.Shopfloor;
+ var businessUnit = organizationInfo.businessUnit;
 
   var newOrganization = new Organization({
     Oraganization_Id: new ObjectID(),
@@ -21,7 +25,7 @@ exports.addOrganization = (req, res, next) => {
     Plant: plant,
     businessUnit: businessUnit,
     //organizationName: String,
-    Workstation: randomString(), //nv
+    // Workstation: randomString(), //nv
     //department: String,
     Shopfloor: shopFloor,
     status: 1,
