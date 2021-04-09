@@ -1,23 +1,20 @@
-var express = require ('express');
-var mongoose = require('mongoose');
+var express = require("express");
+var mongoose = require("mongoose");
 var User = require("../../models/userSchema");
 var Roles = require("../../models/roleSchema");
-var ObjectID = require('mongodb').ObjectID;
-var bcrypt = require('bcryptjs');
-var nodemailer = require('nodemailer')
-const moment= require('moment');
-
+var ObjectID = require("mongodb").ObjectID;
+var bcrypt = require("bcryptjs");
+var nodemailer = require("nodemailer");
+const moment = require("moment");
+const { google } = require("googleapis");
+const OAuth2 = google.auth.OAuth2;
 
 exports.addUser = (req, res, next) => {
-  
-  // if(userSchema.plugin(uniqueValidator)){
-  // 	res.json({message: 'User Name or Email Id already exists' , status: 1});
-  // }
   var userInfo = req.body;
   console.log("Data:" + req.body.pwd);
-  var startDate = moment(userInfo.startdate).format('MMMM Do YYYY, h:mm:ss a');
-  var endDate = moment(userInfo.enddate).format('MMMM Do YYYY, h:mm:ss a');
-  var currentDate = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a');
+  var startDate = moment(userInfo.startdate).format("MMMM Do YYYY, h:mm:ss a");
+  var endDate = moment(userInfo.enddate).format("MMMM Do YYYY, h:mm:ss a");
+  var currentDate = moment(new Date()).format("MMMM Do YYYY, h:mm:ss a");
   var userId = userInfo.UserId;
 
   if (userId == "1234") {
@@ -82,32 +79,62 @@ exports.addUser = (req, res, next) => {
                     res.json({ message: "Save Error", status: 1 });
                   }
                 } else {
-                  var transporter = nodemailer.createTransport(smtpTrasport({
-                    service:'gmail',
-                    host: "smtp.gmail.com",
-                    auth: {
-                      //user: 'foodonlineimca@gmail.com',
-                      user: "atgenx@gmail.com",
-                      //pass: 'imca@123'
-                      pass: "@genX2021",
-                    },
-                  }));
+                  const clientId =
+                    "438648115554-tscqb14rcunjp9c821bmbveh95mmipvb.apps.googleusercontent.com";
+                  const secret = "LYZQF5rIq536pBGu_kHKIqY7";
+                  const email = "atgenx@gmail.com";
+                  const oauth2Client = new OAuth2(
+                    clientId,
+                    secret,
+                    "https://developers.google.com/oauthplayground"
+                  );
+                  const refreshToken =
+                    "1//04hjZ0D5Ujv7wCgYIARAAGAQSNwF-L9Irxl_WaMyf7bEA0Y3RSh-HN2uEaPSGp2Xcy1raaTiKtbHSNGW-LNl_yIDCS96ZvljBcm8";
 
-                  var mailOptions = {
-                    from: "support@atgenx.com",
-                    to: userInfo.email,
-                    subject: "Welcome to albedo",
-                    text: "Your temporary password is: " + userInfo.pwd,
-                  };
-
-                  transporter.sendMail(mailOptions, function (error, info) {
-                    if (error) {
-                      console.log("Error" + error);
-                      res.json({ message: "Email error", status: 1 });
-                    } else {
-                      res.json({ message: "User added", status: 0 });
-                    }
+                  oauth2Client.setCredentials({
+                    refresh_token: refreshToken,
                   });
+
+                  async function sendMail() {
+                    try {
+                      const accessToken = await oauth2Client.getAccessToken();
+
+                      const transport = nodemailer.createTransport({
+                        service: "gmail",
+                        auth: {
+                          type: "OAuth2",
+                          user: email,
+                          clientId: clientId,
+                          clientSecret: secret,
+                          refreshToken:
+                            "1//04hjZ0D5Ujv7wCgYIARAAGAQSNwF-L9Irxl_WaMyf7bEA0Y3RSh-HN2uEaPSGp2Xcy1raaTiKtbHSNGW-LNl_yIDCS96ZvljBcm8",
+                          accessToken: accessToken,
+                        },
+                      });
+
+                      const mailOptions = {
+                        from: email,
+                        to: userInfo.email,
+                        subject: "Welcome to Albedo",
+                        text: "Your temporary password is:  " + userInfo.pwd,
+                        html: `<h3>Welcome to Albedo</h3><p>Your temporary password is: <b>${userInfo.pwd}</b></p>`,
+                      };
+                      const result = await transport.sendMail(mailOptions);
+                      return result;
+                    } catch (error) {
+                      return error;
+                    }
+                  }
+
+                  sendMail()
+                    .then((result) => {
+                      console.log("Email sent...", result);
+                      res.json({ message: "User added", status: 0 });
+                    })
+                    .catch((error) => {
+                      console.log(error.message);
+                      res.json({ message: "Email error", status: 1 });
+                    });
                 }
               });
             }

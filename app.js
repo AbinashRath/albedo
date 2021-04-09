@@ -7,7 +7,7 @@ var cors = require("cors");
 // var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var router = express.Router();
-// var color =  require('color');
+var colors =  require('colors');
 var indexRouter = require("./indexRoutes");
 var usersRouter = require("./users");
 
@@ -20,7 +20,8 @@ mongoose.connect("mongodb://localhost:27017/albedo", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-}).then((console.log(`DATABASE CONNECTED`)));
+}).then( console.log(`DATABASE CONNECTED, SERVER IS UP AND RUNNING  `.cyan.underline.bold),
+console.log(`WELCOME TO ALBEDO DEVELOPEMENT SERVER`.yellow.underline));
 
 //initialize the app
 var app = express();
