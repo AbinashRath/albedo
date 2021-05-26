@@ -8,6 +8,6 @@ var  {updateReason} = require("../controllers/Reason/updateReason");
 router.post("/addReason", addReason);
 router.post("/deleteReason", deleteReason);
 router.get("/fetchReason", fetchReason);
-router.put("updateReason", updateReason);
+router.put("/updateReason", updateReason);
 
 module.exports = router;

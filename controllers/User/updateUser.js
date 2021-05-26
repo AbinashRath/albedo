@@ -1,4 +1,4 @@
-var User = require('../../models/roleSchema');
+var User = require('../../models/userSchema');
 exports.updateUser = (req, res, next) => {
     if (!req.body) {
       return res.status(400).send({

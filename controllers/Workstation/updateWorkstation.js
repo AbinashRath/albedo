@@ -1,4 +1,4 @@
-var Workstation = require('../../models/workstationSchema');
+var Workstation = require('../../models/workstationSchema');  
 exports.updateWorkstation = (req, res, next) => {
     if (!req.body) {
       return res.status(400).send({

@@ -1,5 +1,6 @@
 var AspJob =  require('../../models/aspJobSchema');
 var mmongoose = require('mongoose');
+var User = require('../../models/userSchema');
 var ObjectID = require('mongodb').ObjectID;
 
 exports.aspJob = (req, res, next) => {

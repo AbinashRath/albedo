@@ -1,4 +1,5 @@
 var Reason = require("../../models/reasonSchema");
+var User = require('../../models/userSchema');
 var mongoose = require('mongoose');
 var ObjectID = require('mongodb').ObjectID;
 

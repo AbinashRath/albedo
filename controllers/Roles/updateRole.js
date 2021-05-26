@@ -11,8 +11,6 @@ exports.updateRole = (req, res, next) => {
     if (err) {
       console.log("Something wrong when updating data!");
     }
-
-    console.log("this is doc", doc);
   })
     .then((data) => {
       if (!data) {

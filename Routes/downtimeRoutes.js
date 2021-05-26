@@ -8,6 +8,6 @@ var {updateDowntime} = require("../controllers/Downtime/updateDowntime");
 router.post("/addDowntime", addDowntime);
 router.post("/deleteDowntime", deleteDowntime);
 router.get("/fetchDowntime", fetchDowntime);
-router.put("updateDowntime",updateDowntime)
+router.put("/updateDowntime",updateDowntime)
 
 module.exports = router;

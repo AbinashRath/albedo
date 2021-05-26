@@ -1,4 +1,5 @@
 var Employee = require('../../models/employeeSchema');
+var User = require('../../models/userSchema');
 var mongoose=require('mongoose');
 var ObjectID = require('mongodb').ObjectID;
 
