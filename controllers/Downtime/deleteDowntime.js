@@ -4,7 +4,7 @@ exports.deleteDowntime = (req, res, next) => {
   var newvalues = { $set: { status: 0 } };
   Downtime.updateOne(myquery, newvalues, function (err, result) {
     if (err) {
-      esult.json({ message: "Error", status: 1 });
+      res.json({ message: "Error", status: 1 });
     } else {
       res.json({ message: "Successfully deleted", status: 0 });
     }

@@ -1,5 +1,4 @@
-var express = require("express");
-var mongoose = require("mongoose");
+
 var User = require("../../models/userSchema");
 var Roles = require("../../models/roleSchema");
 var ObjectID = require("mongodb").ObjectID;
@@ -11,10 +10,9 @@ const OAuth2 = google.auth.OAuth2;
 
 exports.addUser = (req, res, next) => {
   var userInfo = req.body;
-  console.log("Data:" + req.body.pwd);
-  var startDate = moment(userInfo.startdate).format("MMMM Do YYYY, h:mm:ss a");
-  var endDate = moment(userInfo.enddate).format("MMMM Do YYYY, h:mm:ss a");
-  var currentDate = moment(new Date()).format("MMMM Do YYYY, h:mm:ss a");
+  var startDate = moment(userInfo.startdate).format("YYYY-MM-DD HH:mm:ss");
+  var endDate = moment(userInfo.enddate).format("YYYY-MM-DD HH:mm:ss");
+  var currentDate = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
   var userId = userInfo.UserId;
 
   if (userId == "1234") {
@@ -22,14 +20,14 @@ exports.addUser = (req, res, next) => {
   }
 
   var roleName = "";
-  var saltRounds = 10;
+  const saltRounds = 10;
 
   Roles.findOne({ _id: userInfo.role }, function (err, response) {
     if (err) {
       res.json({ message: "RoleName error", status: 1 });
     } else {
       console.log("Response: " + response);
-      // roleName = response.Role_Name;
+      roleName = response.Role_Name;
 
       bcrypt.genSalt(saltRounds, function (err, salt) {
         if (err) {
@@ -60,7 +58,7 @@ exports.addUser = (req, res, next) => {
                 First_Login: 1,
                 status: 1,
               });
-              newUser.save(function (err) {
+              newUser.save(function (err, User) {
                 if (err) {
                   if (
                     err.errors.User_name != undefined &&
@@ -81,7 +79,7 @@ exports.addUser = (req, res, next) => {
                 } else {
                   const clientId =
                     "438648115554-tscqb14rcunjp9c821bmbveh95mmipvb.apps.googleusercontent.com";
-                  const secret = "LYZQF5rIq536pBGu_kHKIqY7";
+                  const secret = "WFyBQDu1s0VcZmeR3bDqrcrs";
                   const email = "atgenx@gmail.com";
                   const oauth2Client = new OAuth2(
                     clientId,
@@ -89,7 +87,7 @@ exports.addUser = (req, res, next) => {
                     "https://developers.google.com/oauthplayground"
                   );
                   const refreshToken =
-                    "1//04hjZ0D5Ujv7wCgYIARAAGAQSNwF-L9Irxl_WaMyf7bEA0Y3RSh-HN2uEaPSGp2Xcy1raaTiKtbHSNGW-LNl_yIDCS96ZvljBcm8";
+                    "1//04ib2YTaqIQx4CgYIARAAGAQSNwF-L9IrJVWWhFcGqg48ANEIxZ70aRnUwRSP-Z8JDP5WF9GVlEPZyN-dK2xRcWkRVFy7GZWBka4";
 
                   oauth2Client.setCredentials({
                     refresh_token: refreshToken,
@@ -107,7 +105,7 @@ exports.addUser = (req, res, next) => {
                           clientId: clientId,
                           clientSecret: secret,
                           refreshToken:
-                            "1//04hjZ0D5Ujv7wCgYIARAAGAQSNwF-L9Irxl_WaMyf7bEA0Y3RSh-HN2uEaPSGp2Xcy1raaTiKtbHSNGW-LNl_yIDCS96ZvljBcm8",
+                            "1//04ib2YTaqIQx4CgYIARAAGAQSNwF-L9IrJVWWhFcGqg48ANEIxZ70aRnUwRSP-Z8JDP5WF9GVlEPZyN-dK2xRcWkRVFy7GZWBka4",
                           accessToken: accessToken,
                         },
                       });
@@ -144,3 +142,4 @@ exports.addUser = (req, res, next) => {
     }
   });
 };
+
