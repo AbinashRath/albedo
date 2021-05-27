@@ -18,6 +18,7 @@ var userSchema = new mongoose.Schema({
   Start_Date: String,
   End_Date: String,
   Organization_id: String,
+  Organiozation_Code : String,
   status: Number,
   First_Login: Number,
 });

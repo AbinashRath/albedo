@@ -10,9 +10,9 @@ exports.addRoles = (req, res, next) => {
 
   var newRoles = new Roles({
     Role_Id: new ObjectID(),
-    Role_Name: rolesInfo.rolename,
+    Role_Name: rolesInfo.Role_Name,
     Main_menu: "Not Specified",
-    UI_access: rolesInfo.uiAccess,
+    UI_access: rolesInfo.UI_access,
     SystemAdmin: false,
     APSMaster: false,
     APSDataScreen: false,
