@@ -41,9 +41,9 @@ var usersRouter = require("./users");
 // }).then((console.log(`DATABASE CONNECTED`)));
 
 
-// app.use(cors());
+app.use(cors());
 //Cross origin resource sharing.
-app.options('*', cors());
+// app.options('*', cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

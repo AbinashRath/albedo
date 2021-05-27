@@ -21,16 +21,16 @@ exports.addInventory = (req, res, next) => {
 
   var newInventory = new InventoryCalender({
     Inventory_id: new ObjectID(),
-    Inventory_Cal_Name: inventoryInfo.name,
-    Year: inventoryInfo.year,
+    Inventory_Cal_Name: inventoryInfo.Inventory_Cal_Name,
+    Year: inventoryInfo.Year,
     Start_Date: startDate,
     End_Date: endDate,
-    Period: inventoryInfo.inventoryPeriod,
+    Period: inventoryInfo.inventoryInfo.Period,
     P_Start_Date: PrStartDate,
     P_End_Date: PrEndDate,
-    Schedule: inventoryInfo.schedule,
-    Shift: inventoryInfo.shift,
-    Shift_Hour: inventoryInfo.hour,
+    Schedule: inventoryInfo.Schedule,
+    Shift: inventoryInfo.Shift,
+    Shift_Hour: inventoryInfo.Shift_Hour,
     status: 1,
   });
 

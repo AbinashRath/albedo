@@ -6,7 +6,7 @@ var {fetchEmployee} = require("../controllers/Employee/fetchEmployee");
 var {updateEmployee} = require("../controllers/Employee/updateEmployee");
 
 router.post("/addEmployee", addEmployee);
-router.post("/deleteEmpolyee", deleteEmployee);
+router.post("/deleteEmployee", deleteEmployee);
 router.get("/fetchEmployee", fetchEmployee);
 router.get("/updateEmployee",updateEmployee);
 

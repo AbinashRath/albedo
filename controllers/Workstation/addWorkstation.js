@@ -1,5 +1,6 @@
 var Workstation =  require('../../models/workstationSchema');
 var mongoose = require('mongoose');
+var User = require('../../models/userSchema');
 var ObjectID = require('mongodb').ObjectID;
 // var mongoose = require('mongoose');
 exports.addWorkstation = (req, res, next) => {
