@@ -10,9 +10,7 @@ var itemMasterSchema = new mongoose.Schema({
   Max_Produce_Hr: String,
   Averag_Produce_Hr: String,
   ItemDescription: String,
-  Organization_id: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "Organization" },
-  ],
+  Organization_id: String,
   status: Number,
 });
 itemMasterSchema.pre("save", function (next) {

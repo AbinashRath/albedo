@@ -9,10 +9,8 @@ var employeeSchema = new mongoose.Schema({
   Role_id: [{ type: mongoose.Schema.Types.ObjectId, ref: "Roles" }],
   Phone: String,
   Mobile: String,
-  Manager_number: [{ type: mongoose.Schema.Types.ObjectId, ref: "Employee" }],
-  Oraganization_Id: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "Organization" },
-  ],
+  Manager_number: String,
+  Oraganization_Id: String,
   status: Number,
 });
 
