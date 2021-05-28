@@ -79,15 +79,18 @@ exports.addUser = (req, res, next) => {
                 } else {
                   const clientId =
                     "438648115554-tscqb14rcunjp9c821bmbveh95mmipvb.apps.googleusercontent.com";
-                  const secret = "WFyBQDu1s0VcZmeR3bDqrcrs";
+                  // const secret = "WFyBQDu1s0VcZmeR3bDqrcrs";
+                  const secret = "8BpaSbsRtmy5OhZBspORyt9x";
                   const email = "atgenx@gmail.com";
                   const oauth2Client = new OAuth2(
                     clientId,
                     secret,
                     "https://developers.google.com/oauthplayground"
                   );
-                  const refreshToken =
-                    "1//04ib2YTaqIQx4CgYIARAAGAQSNwF-L9IrJVWWhFcGqg48ANEIxZ70aRnUwRSP-Z8JDP5WF9GVlEPZyN-dK2xRcWkRVFy7GZWBka4";
+                  // const refreshToken =
+                  //   "1//04ib2YTaqIQx4CgYIARAAGAQSNwF-L9IrJVWWhFcGqg48ANEIxZ70aRnUwRSP-Z8JDP5WF9GVlEPZyN-dK2xRcWkRVFy7GZWBka4";
+                    const refreshToken =
+                    "1//04AgXkIaC_X2tCgYIARAAGAQSNwF-L9Ir7BbNhU2E9W2EprnI357NEaOp7atSXk9WW7NOz3RCYPJsshMWbnHzH3Q8bZT2_1vmntY";
 
                   oauth2Client.setCredentials({
                     refresh_token: refreshToken,
@@ -96,17 +99,22 @@ exports.addUser = (req, res, next) => {
                   async function sendMail() {
                     try {
                       const accessToken = await oauth2Client.getAccessToken();
+                      console.log(accessToken);
 
                       const transport = nodemailer.createTransport({
-                        service: "gmail",
+                        // service: "gmail",
+                        host: 'smtp.gmail.com',
+                        port: 465,
+                        secure:true,
                         auth: {
                           type: "OAuth2",
                           user: email,
                           clientId: clientId,
                           clientSecret: secret,
                           refreshToken:
-                            "1//04ib2YTaqIQx4CgYIARAAGAQSNwF-L9IrJVWWhFcGqg48ANEIxZ70aRnUwRSP-Z8JDP5WF9GVlEPZyN-dK2xRcWkRVFy7GZWBka4",
+                            "1//04AgXkIaC_X2tCgYIARAAGAQSNwF-L9Ir7BbNhU2E9W2EprnI357NEaOp7atSXk9WW7NOz3RCYPJsshMWbnHzH3Q8bZT2_1vmntY",
                           accessToken: accessToken,
+                          
                         },
                       });
 
